@@ -1,9 +1,34 @@
 import io
+from functools import wraps
+from inspect import isclass
 import numpy as np
 import cv2
 import scipy.io as sio
 from PIL import Image
+from django.urls import path
+from django.views import View
 from django.conf import settings
+
+
+def router(route, name=""):
+    def inner_warpper(func):
+        from django.urls import get_resolver
+        resolver = get_resolver()
+
+        if isclass(func) and issubclass(func, View):
+            resolver.url_patterns.append(path(f"{route}/", func.as_view(), name=name if name else None))
+        else:
+            resolver.url_patterns.append(path(f"{route}/", func, name=name if name else None))
+
+        @wraps(func)
+        def wrapper(request, *args, **kwargs):
+            return func(request, *args, **kwargs)
+
+        return wrapper
+
+    return inner_warpper
+
+
 def img_preprocess(img):
     return cv2.cvtColor(np.array(Image.open(io.BytesIO(img.read()))), cv2.COLOR_BGR2GRAY)
 
