@@ -117,6 +117,6 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-MEDIA_ROOT = BASE_DIR / "result"
-MEDIA_URL = '/result/'
+RESULT_ROOT = BASE_DIR / "result"
+RESULT_URL = '/result/'
 DOMAIN = 'https://sar.imbai.cn'
