@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./define.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./base.css">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+</head>
+<body>
+    <div class="load">
+        <div class="control">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <button type="submit" class="upload" id="upload">
+                Upload
+            </button>
+        </div>
+
+        <div id="image" class="image">
+            <form method="post" name="form" id="form" enctype="multipart/form-data">
+                <div class="first box">
+                    <input type="file" class="input" name="first" id="first">
+                </div>
+                <div class="second box">
+                    <input type="file" class="input" name="second" id="second">
+                </div>
+            </form>
+        </div>
+
+        <div class="bar">
+            <div class="process">loading</div>
+        </div>
+</body>
+</html>
