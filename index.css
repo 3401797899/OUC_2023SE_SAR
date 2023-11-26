@@ -1,10 +1,10 @@
 body{
-    background: skyblue;
+    background: var(--bgc--color);
 }
 
 .load{
-    width: 800px;
-    height: 480px;
+    width: 900px;
+    height: 520px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -13,15 +13,15 @@ body{
     background: white;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .control{
-    width: 720px;
+    width: 820px;
     margin-top: 20px;
-    left: 40px;
     position: relative;
+    left: 40px;
 }
 
 .control ul{
@@ -34,6 +34,7 @@ body{
     margin: 4px;
     border-radius: 2px;
     background: skyblue;
+    user-select: none;
 }
 
 .control  li:nth-child(2){
@@ -60,33 +61,112 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 720px;
-    height: 340px;
+    width: 820px;
+    height: 290px;
     left: 40px;
 }
 
-.image>div{
+.image > img {
+    user-select: none;
+}
+
+.image>form{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 820px;
+    height: 290px;
+}
+
+.image>form>div{
     /*display: inline-block;*/
-    width: 300px;
-    height: 300px;
+    position: relative;
+    width: 250px;
+    height: 250px;
     margin: 20px 0;
     border-radius: 10px;
     border: 2px dashed;
+    background-image: url(./images/img_black.png);
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.first {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-
+.image>form>div::before{
+    /*display: inline-block;*/
+    position: absolute;
+    font-size: 16px;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.second{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.image .icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.first::before{
+    content: "first picture!";
+}
+
+.second::before{
+    content: "second picture!";
+}
+
+.box .close{
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    border-radius: calc(25px / 2);
+    z-index: 100;
+    font-size: 14px;
+    line-height: 25px;
     text-align: center;
+    color: aliceblue;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.box .close:hover{
+    opacity: 1;
+}
+/* .close::before{
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    z-index: 100;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    color: aliceblue;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+} */
+
+.box>img{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.box input{
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
 }
 
 .bar{
@@ -101,6 +181,7 @@ body{
     height: 4px;
     border-radius: 2px;
     background-color: skyblue;
+    user-select: none;
 }
 
 .bar ul{
