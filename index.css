@@ -3,8 +3,8 @@ body{
 }
 
 .load{
-    width: 900px;
-    height: 520px;
+    width: 750px;
+    height: 480px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -18,7 +18,7 @@ body{
 }
 
 .control{
-    width: 820px;
+    width: 670px;
     margin-top: 20px;
     position: relative;
     left: 40px;
@@ -61,8 +61,8 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 820px;
-    height: 290px;
+    width: 670px;
+    height: 300px;
     left: 40px;
 }
 
@@ -75,16 +75,14 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 820px;
-    height: 290px;
+    width: 670px;
+    height: 300px;
 }
 
 .image>form>div{
-    /*display: inline-block;*/
     position: relative;
-    width: 250px;
-    height: 250px;
-    margin: 20px 0;
+    width: 300px;
+    height: 300px;
     border-radius: 10px;
     border: 2px dashed;
     background-image: url(./images/img_black.png);
@@ -93,7 +91,6 @@ body{
 }
 
 .image>form>div::before{
-    /*display: inline-block;*/
     position: absolute;
     font-size: 16px;
     top: 65%;
@@ -136,6 +133,7 @@ body{
 .box .close:hover{
     opacity: 1;
 }
+
 /* .close::before{
     opacity: 0;
     position: absolute;
@@ -171,27 +169,31 @@ body{
 
 .bar{
     position: relative;
-    width: 720px;
+    width: 670px;
     height: 40px;
     left: 40px;
-}
-
-.bar li{
-    width: 720px;
-    height: 4px;
-    border-radius: 2px;
-    background-color: skyblue;
-    user-select: none;
-}
-
-.bar ul{
-    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
 }
 
 .bar .process{
+    display: inline-block;
     color: skyblue;
     font: optional;
     font-size: 18px;
     font-weight: 600;
+    width: 70px;
     margin-top: 5px;
+}
+
+.bar progress{
+    display: inline-block;
+    width: 560px;
+    height: 20px;
+    margin: 10px 20px;
+    left: 20px;
+}
+
+.bar progress::-moz-progress-bar {
+    background-color: lightblue;
 }
