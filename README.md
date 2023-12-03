@@ -1,11 +1,21 @@
-# SAR图像变化检测
+# Backend相关介绍
 
-本仓库为2023软件工程第3小组实践项目。
+## 部署方式
+1. 下载项目源代码后，执行
+  ```bash
+  pip install -r requirements.txt
+  ```
+  安装项目相关依赖。
 
-`main`分支用于保存项目的介绍、文档和记录等。
+2. 运行项目
+  ```bash
+  python manage.py runserver
+  ```
+3. 默认端口为8000，访问http://localhost:8000/ 即可。
 
-`web`分支用于保存前端相关代码。
+## 项目接口文档
 
-`backend`分支用于保存后端相关代码。
+链接: https://apifox.com/apidoc/shared-7d2aa47f-db2b-4b2c-be12-54b9a80153c6
 
-`ML`分支用于保存机器学习相关代码。
+访问密码 : KA4qgpRs
+
