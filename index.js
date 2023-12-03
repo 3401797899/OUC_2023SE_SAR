@@ -139,52 +139,61 @@
 
         var 
             formData = new FormData(),
-            form = document.querySelector("form")
+            id
 
-        formData.append('file', $('#first')[0].files[0]);  //添加图片信息的参数
-        formData.append('file', $('#second')[0].files[0]);
-        // formData.append('sizeid', 123);  //添加其他参数
+        formData.append('img1', $('#first')[0].files[0]);  //添加图片信息的参数
+        formData.append('img2', $('#second')[0].files[0]);
 
         $.ajax({
-            url: 'https://github.com/Aurorsa/aurorsa.github.io',
+            url: 'http://10.140.49.66:8000/sar/',
             type: 'POST',
             cache: false, //上传文件不需要缓存
             data: formData,
             processData: false, // 告诉jQuery不要去处理发送的数据
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-            success: function (result) {
-                var
-                    data
-
+            success: function (data) {
                 try {
-                    data = JSON.parse(result);
-                    if (typeof data.msg === "object") {
-                        var
-                            div = document.createElement("div"),
-                            img = document.createElement("image"),
-                            fstDiv = document.querySelector(".first")
-                            secDiv = document.querySelector(".second")
-
-                        //把元素移动到指定的目标位置
-                        animate(fstDiv, 0);    
-                        animate(secDiv, 285);
-
-                        img.setAttribute("src", data)
-                        div.appendChild(img)
-                        form.appendChild(div)
+                    if (data.status == "ok") {
+                        id = data.id
+                        setTimeout(getApi, 5000, id)
                     } else { 
-                        alert(data.msg)
+                        alert(data.status)
                     }
-                    console.log(data);
                 } catch (error) {
-                    console.error(error);
+                    console.error(error)
                 }
             },
             error: function (data) {
                 alert("上传失败");
             }
-        }) 
+        })     
     })
+
+    function getApi(id) {
+        //设置时间 5-秒  1000-毫秒  这里设置你自己想要的时间 
+        $.ajax({
+            url: 'http://10.140.49.66:8000/sar/',
+            type: 'GET',
+            data: {
+                id:id
+            },
+            success: function (data) {
+                if (typeof data.msg == 'number') {  
+
+                    process.value = data.msg
+                    console.log(id)
+                    setTimeout(getApi, 1000, id)
+
+                } else {
+                    var
+                        image = document.getElementsByClassName("submit")
+
+                    image[0].src = data.msg[0]
+                    image[1].src = data.msg[1]
+                }
+            }
+        })
+    }
 
     upload.addEventListener("click", (e) => {   
         form.dispatchEvent(new Event("submit"))
