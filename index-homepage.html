@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>项目简介</title>
-    <link rel="stylesheet" href="style.css"> <!--用css为页面布局设置样式 -->
+    <link rel="stylesheet" href="style-homepage.css"> <!--用css为页面布局设置样式 -->
 </head>
 <body>
     <header>
     <button class="menu">&#9776;</button>
     <h1>OUC软工第三小组</h1>
+
     <nav>
     <ul><!--#页面的跳转 -->
-        <li><a href="#">返回</a></li>    <!-- 在此处输入主界面的 eg：page.html  -->
+        <!--   <li><a href="#">返回</a></li>     在此处输入主界面的 eg：page.html  -->
         <!--
         <li><a href="#">關於我們</a></li>
         <li><a href="#">門市據點</a></li>
@@ -39,13 +40,13 @@
     </p>
         <nav>
             <ul>
-                <li><a href="#">开始计算</a></li>
+                <li><a href="#">开始计算</a></li>    <!--富豪，请把#处换成你设计的页面的html名字如：index.html-->
             </ul>
         </nav>
     </section>
 
     <section class="shop">
-    <img src="images/changephoto.jpg" alt="图片1"> <!--在src处填图片位置，如images/p3.png-->
+    <img src="images/changephoto.jpg" alt="图片1">
     <div class="info">
     <h2>专业，我们是认真的！</h2>
     <p>SAFNet网络作为核心算法，结合多尺度卷积、多维主胶囊层和<br>
@@ -53,29 +54,33 @@
        </p>
     </div>
     </section>
-
     <section class="product">
+
         <div>
-            <img src="images/SAR.jpg" alt="小组讨论照片1"> <!--在src处填图片位置，如images/p3.png-->
-            <h3>标题</h3>
-            <p>内容</p>
+            <br><br>
+            <img src="images/stand_meeting.png" alt="小组讨论照片1">
+            <h3>站立会议</h3>
+            <p>“每周日常”</p>
         </div>
         <div>
-            <img src="images/SAR.jpg" alt="小组讨论照片2"> <!--在src处填图片位置，如images/p3.png-->
-            <h3>标题</h3>
-            <p>内容</p>
+            <img src="images/discussion1.jpg" alt="小组讨论照片2">
+            <h3>修改Bug</h3>
+            <p>“痛苦面具”</p>
         </div>
         <div>
-            <img src="images/SAR.jpg" alt="小组讨论照片3">  <!--在src处填图片位置，如images/p3.png-->
-            <h3>标题</h3>
-            <p>内容</p>
+            <br><br>
+            <img src="images/discussion2.png" alt="小组讨论照片3">
+            <h3>小组讨论</h3>
+            <p>“制定计划”</p>
         </div>
     </section>
 
     <section class="newsletter">
         <p>期待您的私信</p>
         <form>
-            <input type="email" placeholder="请输入您的Email" required>
+            <label>
+                <input type="email" placeholder="请输入您的Email" required>
+            </label>
             <button type="submit">送出</button>
         </form>
     </section>

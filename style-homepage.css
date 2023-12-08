@@ -134,26 +134,30 @@ header a:hover {
     line-height: 2em;
 }
 .product {
-    display:flex;
+    display: flex;
     background-color: #ede9db;
     justify-content: space-between;
     align-items: center;
     padding: 100px 180px 80px;
 }
 .product div {
-    width:300px;
-    text-align:center;
+    width: 300px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .product img {
-    width:100%;
-    border-radius: 10px;;
+    width: 100%;
+    border-radius: 10px;
 }
 .product h3 {
-    font-size: 20px;    
+    font-size: 20px;
     margin: 20px 0;
 }
 .product p {
-    font-size:14px;
+    font-size: 15px;
     line-height: 1.6em;
 }
 .newsletter {
