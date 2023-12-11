@@ -1,6 +1,5 @@
 import numpy as np
 from django.conf import settings
-from django.core.cache import cache
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -169,7 +168,7 @@ model.load_state_dict(torch.load(settings.BASE_DIR / "model.pth", map_location=t
 margin = (windowSize - 1) // 2
 
 
-def get_result(im1, im2, result_id):
+def get_result(im1, im2, result_id, cache):
     im1 = im1.reshape(im1.shape[0], im1.shape[1], 1)
     im2 = im2.reshape(im2.shape[0], im2.shape[1], 1)
     height, width, c = im1.shape
@@ -189,7 +188,7 @@ def get_result(im1, im2, result_id):
             _, _, prediction = model(X_test_image, X_test_image1)
             prediction = np.argmax(prediction.detach().cpu().numpy(), axis=1)
             outputs[i][j] = prediction
-        cache.set(result_id, i * 100 // height, timeout=None)
+        cache.set(result_id, i * 100 // height)
     # postprocessing if need
     outputs = postprocess(outputs)
     cache.delete(result_id)
