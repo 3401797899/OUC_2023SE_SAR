@@ -1,0 +1,9 @@
+Django
+numpy
+torch
+scikit-image
+Pillow
+scipy
+opencv-python-headless
+opencv-contrib-python-headless
+django-cors-headers
