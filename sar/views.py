@@ -1,3 +1,4 @@
+import hashlib
 import io
 import os.path
 import uuid
@@ -10,8 +11,10 @@ from sar.utils import router, img_preprocess, convert_result_to_image
 from django.views import View
 from celery import shared_task
 import redis
+from .models import Logs
 
 cache = redis.Redis(host='localhost', port=6379, db=7)
+
 
 @shared_task
 def process_images(im1, im2, result_id):
@@ -20,6 +23,7 @@ def process_images(im1, im2, result_id):
     result = get_result(im1, im2, result_id, cache)
     convert_result_to_image(result, [im1, im2], result_id)
     cache.delete(result_id)
+
 
 @router('sar', name='sar')
 class ResultView(View):
@@ -39,6 +43,14 @@ class ResultView(View):
 
     def post(self, request):
         try:
+            # md5 查询是否已经识别过
+            hash1 = hashlib.md5(io.BytesIO(request.FILES['img1'].read()))
+            hash2 = hashlib.md5(io.BytesIO(request.FILES['img2'].read()))
+            log = Logs.objects.filter(im1=hash1.hexdigest(), im2=hash2.hexdigest())
+            if log.exists():
+                log = log.first()
+                return JsonResponse({'status': 'ok', 'id': log.result_id})
+
             result_id = str(uuid.uuid4())
             im1 = np.array(Image.open(io.BytesIO(request.FILES['img1'].read())))
             im2 = np.array(Image.open(io.BytesIO(request.FILES['img2'].read())))
