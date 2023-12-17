@@ -6,11 +6,12 @@ import numpy as np
 from PIL import Image
 from django.conf import settings
 from django.http import JsonResponse
-from sar.model import get_result
+from sar.model import get_result, get_accuracy
 from sar.utils import router, img_preprocess, convert_result_to_image
 from django.views import View
 from celery import shared_task
 import redis
+import cv2
 from .models import Logs
 
 cache = redis.Redis(host='localhost', port=6379, db=7)
@@ -59,3 +60,19 @@ class ResultView(View):
             return JsonResponse({'status': 'ok', 'id': result_id})
         except Exception as e:
             return JsonResponse({'status': 'error', 'msg': str(e)})
+
+
+@router('accuracy')
+def get_accuracy_view(request):
+    def process_img(name):
+        im1 = np.array(Image.open(io.BytesIO(request.FILES[name].read()))).astype(np.uint8)
+        if len(im1.shape) == 3 and im1.shape[2] == 3:  # 检查是否为三通道彩色图像
+            im1 = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
+        return im1
+
+    im1 = process_img('img1')
+    im2 = process_img('img2')
+    im_gt = process_img('img_gt')
+    im_gt = np.where(im_gt == 0, 1, 2)
+    accuracy = get_accuracy(im1, im2, im_gt)
+    return JsonResponse({'status': 'ok', 'msg': f'{accuracy:.2f}%'})

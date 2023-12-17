@@ -195,26 +195,6 @@ def get_result(im1, im2, result_id, cache):
     return outputs
 
 
-def get_accuracy(im1, im2, stand_img):
-    im1 = im1.reshape(im1.shape[0], im1.shape[1], 1)
-    im2 = im2.reshape(im2.shape[0], im2.shape[1], 1)
-
-    windowSize = 7
-    # data_path = '/content/drive/MyDrive/sars/test/data'  # 修改为自定义图片路径
-    # stand_img = sio.loadmat(os.path.join(data_path, 'san_gt.mat'))['data']
-    X_test, test_labels, _ = createImgCube(im1, stand_img, createPosWithoutZero(im1, stand_img),
-                                           windowSize=windowSize)
-    X_test_2, _, _ = createImgCube(im2, stand_img, createPosWithoutZero(im2, stand_img), windowSize=windowSize)
-    X_test = torch.from_numpy(X_test.transpose(0, 3, 1, 2)).float()
-    X_test_2 = torch.from_numpy(X_test_2.transpose(0, 3, 1, 2)).float()
-
-    testset = TestDS(test_labels, X_test, X_test_2)
-    test_loader = torch.utils.data.DataLoader(dataset=testset, batch_size=128, shuffle=False, num_workers=0)
-
-    acc = test(model, device, test_loader)
-    return acc
-
-
 def createImgCube(X, gt, pos: list, windowSize=25):
     margin = (windowSize - 1) // 2
     zeroPaddingX = addZeroPadding(X, margin=margin)
@@ -226,8 +206,8 @@ def createImgCube(X, gt, pos: list, windowSize=25):
     else:
         nextPos = (0, 0)
     return np.array([zeroPaddingX[i:i + windowSize, j:j + windowSize, :] for i, j in pos]), \
-        np.array([gt[i, j] for i, j in pos]), \
-        nextPos
+           np.array([gt[i, j] for i, j in pos]), \
+           nextPos
 
 
 def createPosWithoutZero(hsi, gt):
@@ -257,8 +237,6 @@ def test(model, device, test_loader):
         if test_labels[c] == y_pred_test[c]:
             a = a + 1
     acc = a / len(y_pred_test) * 100
-    print('%.2f' % (a / len(y_pred_test) * 100))
-
     return acc
 
 
@@ -274,3 +252,33 @@ class TestDS(torch.utils.data.Dataset):
 
     def __len__(self):
         return self.len
+
+
+def get_accuracy(im1, im2, stand_img):
+    im1 = im1.reshape(im1.shape[0], im1.shape[1], 1)
+    im2 = im2.reshape(im2.shape[0], im2.shape[1], 1)
+
+    # data_path = '/content/drive/MyDrive/sars/test/data'  # 修改为自定义图片路径
+    # stand_img = sio.loadmat(os.path.join(data_path, 'san_gt.mat'))['data']
+    X_test, test_labels, _ = createImgCube(im1, stand_img, createPosWithoutZero(im1, stand_img),
+                                           windowSize=windowSize)
+    X_test_2, _, _ = createImgCube(im2, stand_img, createPosWithoutZero(im2, stand_img), windowSize=windowSize)
+    X_test = torch.from_numpy(X_test.transpose(0, 3, 1, 2)).float()
+    X_test_2 = torch.from_numpy(X_test_2.transpose(0, 3, 1, 2)).float()
+
+    testset = TestDS(test_labels, X_test, X_test_2)
+    test_loader = torch.utils.data.DataLoader(dataset=testset, batch_size=128, shuffle=False, num_workers=0)
+
+    acc = test(model, device, test_loader)
+    return acc
+
+
+if __name__ == '__main__':
+    import cv2, os
+
+    im1 = cv2.cvtColor(cv2.imread(os.path.join(os.getcwd(), 'Farm1.bmp')), cv2.COLOR_BGR2GRAY)
+    im2 = cv2.cvtColor(cv2.imread(os.path.join(os.getcwd(), 'Farm2.bmp')), cv2.COLOR_BGR2GRAY)
+    im_gt = cv2.cvtColor(cv2.imread(os.path.join(os.getcwd(), 'Farm_gt.bmp')), cv2.COLOR_BGR2GRAY)
+    modified_image = np.where(im_gt == 0, 1, 2)
+
+    print(get_accuracy(im1, im2, modified_image))
