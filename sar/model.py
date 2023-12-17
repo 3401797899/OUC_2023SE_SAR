@@ -212,7 +212,7 @@ def get_accuracy(im1, im2, stand_img):
     test_loader = torch.utils.data.DataLoader(dataset=testset, batch_size=128, shuffle=False, num_workers=0)
 
     acc = test(model, device, test_loader)
-    print('The final accuracy is ', acc)
+    return acc
 
 
 def createImgCube(X, gt, pos: list, windowSize=25):
