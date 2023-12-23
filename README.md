@@ -2,16 +2,26 @@
 
 ## 部署方式
 1. 下载项目源代码后，执行
-  ```bash
-  pip install -r requirements.txt
-  ```
-  安装项目相关依赖。
+   ```bash
+   pip install -r requirements.txt
+   ```
+   安装项目相关依赖。
 
-2. 运行项目
-  ```bash
-  python manage.py runserver
-  ```
-3. 默认端口为8000，访问http://localhost:8000/ 即可。
+2. 确保redis正常运行并启动celery
+   ```bash
+   celery -A OUC_SE_G3_SAR worker -l info
+   ```
+   如果是windows请加上`--pool=solo`
+   ```bash
+   celery -A OUC_SE_G3_SAR worker -l info --pool=solo
+   ```
+   
+3. 运行项目
+   ```bash
+   python manage.py runserver
+   ```
+   
+4. 默认端口为8000，访问http://localhost:8000/ 即可。
 
 ## 项目接口文档
 
