@@ -44,17 +44,23 @@ class ResultView(View):
 
     def post(self, request):
         try:
-            # md5 查询是否已经识别过
-            hash1 = hashlib.md5(io.BytesIO(request.FILES['img1'].read()))
-            hash2 = hashlib.md5(io.BytesIO(request.FILES['img2'].read()))
+        # md5 查询是否已经识别过
+            file1 = request.FILES['img1'].read()
+            file2 = request.FILES['img2'].read()
+            hash1 = hashlib.md5(file1)
+            hash2 = hashlib.md5(file2)
             log = Logs.objects.filter(im1=hash1.hexdigest(), im2=hash2.hexdigest())
             if log.exists():
                 log = log.first()
                 return JsonResponse({'status': 'ok', 'id': log.result_id})
-
+            def process_img(file):
+                im1 = np.array(Image.open(io.BytesIO(file))).astype(np.uint8)
+                if len(im1.shape) == 3 and im1.shape[2] == 3:  # 检查是否为三通道彩色图像
+                    im1 = cv2.cvtColor(im1, cv2.COLOR_BGR2GRAY)
+                return im1
             result_id = str(uuid.uuid4())
-            im1 = np.array(Image.open(io.BytesIO(request.FILES['img1'].read())))
-            im2 = np.array(Image.open(io.BytesIO(request.FILES['img2'].read())))
+            im1 = process_img(file1)
+            im2 = process_img(file2)
             cache.set(result_id, '等待队列中...')
             process_images.delay(im1.tolist(), im2.tolist(), result_id)
             return JsonResponse({'status': 'ok', 'id': result_id})
