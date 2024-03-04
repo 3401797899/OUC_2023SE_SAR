@@ -193,3 +193,92 @@ def get_result(im1, im2, result_id, cache):
     outputs = postprocess(outputs)
     cache.delete(result_id)
     return outputs
+
+
+def createImgCube(X, gt, pos: list, windowSize=25):
+    margin = (windowSize - 1) // 2
+    zeroPaddingX = addZeroPadding(X, margin=margin)
+    dataPatches = np.zeros((pos.__len__(), windowSize, windowSize, X.shape[2]))
+    if (pos[-1][1] + 1 != X.shape[1]):
+        nextPos = (pos[-1][0], pos[-1][1] + 1)
+    elif (pos[-1][0] + 1 != X.shape[0]):
+        nextPos = (pos[-1][0] + 1, 0)
+    else:
+        nextPos = (0, 0)
+    return np.array([zeroPaddingX[i:i + windowSize, j:j + windowSize, :] for i, j in pos]), \
+           np.array([gt[i, j] for i, j in pos]), \
+           nextPos
+
+
+def createPosWithoutZero(hsi, gt):
+    mask = gt > 0
+    return [(i, j) for i, row in enumerate(mask) for j, row_element in enumerate(row) if row_element]
+    # return np.argwhere(mask).flatten()
+
+
+def test(model, device, test_loader):
+    model.eval()
+    count = 0
+    for inputs_1, inputs_2, labels in test_loader:
+
+        inputs_1, inputs_2 = inputs_1.to(device), inputs_2.to(device)
+        _, _, outputs = model(inputs_1, inputs_2)
+        outputs = np.argmax(outputs.detach().cpu().numpy(), axis=1)
+
+        if count == 0:
+            y_pred_test = outputs
+            test_labels = labels
+            count = 1
+        else:
+            y_pred_test = np.concatenate((y_pred_test, outputs))
+            test_labels = np.concatenate((test_labels, labels))
+    a = 0
+    for c in range(len(y_pred_test)):
+        if test_labels[c] == y_pred_test[c]:
+            a = a + 1
+    acc = a / len(y_pred_test) * 100
+    return acc
+
+
+class TestDS(torch.utils.data.Dataset):
+    def __init__(self, test_labels, X_test, X_test_2):
+        self.len = test_labels.shape[0]
+        self.hsi = torch.FloatTensor(X_test)
+        self.lidar = torch.FloatTensor(X_test_2)
+        self.labels = torch.LongTensor(test_labels - 1)
+
+    def __getitem__(self, index):
+        return self.hsi[index], self.lidar[index], self.labels[index]
+
+    def __len__(self):
+        return self.len
+
+
+def get_accuracy(im1, im2, stand_img):
+    im1 = im1.reshape(im1.shape[0], im1.shape[1], 1)
+    im2 = im2.reshape(im2.shape[0], im2.shape[1], 1)
+
+    # data_path = '/content/drive/MyDrive/sars/test/data'  # 修改为自定义图片路径
+    # stand_img = sio.loadmat(os.path.join(data_path, 'san_gt.mat'))['data']
+    X_test, test_labels, _ = createImgCube(im1, stand_img, createPosWithoutZero(im1, stand_img),
+                                           windowSize=windowSize)
+    X_test_2, _, _ = createImgCube(im2, stand_img, createPosWithoutZero(im2, stand_img), windowSize=windowSize)
+    X_test = torch.from_numpy(X_test.transpose(0, 3, 1, 2)).float()
+    X_test_2 = torch.from_numpy(X_test_2.transpose(0, 3, 1, 2)).float()
+
+    testset = TestDS(test_labels, X_test, X_test_2)
+    test_loader = torch.utils.data.DataLoader(dataset=testset, batch_size=128, shuffle=False, num_workers=0)
+
+    acc = test(model, device, test_loader)
+    return acc
+
+
+if __name__ == '__main__':
+    import cv2, os
+
+    im1 = cv2.cvtColor(cv2.imread(os.path.join(os.getcwd(), 'Farm1.bmp')), cv2.COLOR_BGR2GRAY)
+    im2 = cv2.cvtColor(cv2.imread(os.path.join(os.getcwd(), 'Farm2.bmp')), cv2.COLOR_BGR2GRAY)
+    im_gt = cv2.cvtColor(cv2.imread(os.path.join(os.getcwd(), 'Farm_gt.bmp')), cv2.COLOR_BGR2GRAY)
+    modified_image = np.where(im_gt == 0, 1, 2)
+
+    print(get_accuracy(im1, im2, modified_image))
