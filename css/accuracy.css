@@ -1,0 +1,258 @@
+body {
+    background: var(--bgc--color);
+}
+body .nav ul .nav-box {
+    left: 120px;
+}
+
+.load {
+    position: absolute;
+    width: 900px;
+    height: 480px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    overflow: hidden;
+    background-image: url('../images/2.png');
+    background-attachment: fixed;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.ctrl {
+    width: 820px;
+    left: 40px;
+    margin-top: 20px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ctrl .menu {
+    display: inline-block;
+    width: 160px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.ctrl .menu div{
+    width: 32px;
+    height: 32px;
+}
+
+.ctrl ul {
+    display: inline-block;
+}
+
+.ctrl li {
+    width: 24px;
+    height: 4px;
+    margin: 4px;
+    border-radius: 2px;
+    background: skyblue;
+    user-select: none;
+}
+
+.ctrl li:nth-child(2) {
+    width: 36px;
+}
+
+.ctrl .btn {
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    /* float: right; */
+    border-radius: 10px;
+    font: optional;
+    font-size: 18px;
+    line-height: 40px;
+    text-align: center;
+    color: aliceblue;
+    font-weight: 800;
+    background: skyblue;
+}
+
+.load .upload-img {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 820px;
+    height: 250px;
+    left: 40px;
+}
+
+.upload-img>img {
+    user-select: none;
+}
+
+.upload-img>form {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 820px;
+    height: 250px;
+}
+
+.upload-img>form>div {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    border: 2px dashed;
+    background-image: url(../images/img_black.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.upload-img>form>div::before {
+    position: absolute;
+    font-size: 16px;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.upload-img .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.first::before {
+    content: "first picture!";
+}
+
+.second::before {
+    content: "second picture!";
+}
+
+.result::before {
+    content: "result picture!";
+}
+
+.box .close {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    border-radius: calc(25px / 2);
+    z-index: 100;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    color: aliceblue;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.box .close:hover {
+    opacity: 1;
+}
+
+/* .close::before{
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    z-index: 100;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+    color: aliceblue;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6);
+} */
+
+.box>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.box input {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.bar {
+    position: relative;
+    width: 670px;
+    height: 40px;
+    left: 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+.bar .process {
+    display: flex;
+    color: skyblue;
+    font: optional;
+    font-size: 18px;
+    font-weight: 600;
+    width: 70px;
+    margin-top: 5px;
+}
+
+.bar progress {
+    display: inline-block;
+    width: 560px;
+    height: 20px;
+    margin: 10px 20px;
+    left: 20px;
+}
+
+.bar progress::-moz-progress-bar {
+    background-color: lightblue;
+}
+
+.loading {
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

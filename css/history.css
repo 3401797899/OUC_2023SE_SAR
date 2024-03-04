@@ -1,0 +1,144 @@
+body {
+    min-height: 100vh;
+    transition: all 0.3s ease;
+}
+
+/* ����ȫ�ֱ��� */
+:root {
+    --body-color: #E4E9F7;
+    --shell-color: #FFF;
+    --primary-color: #695CFE;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+}
+
+.shell {
+    position: fixed;
+    top: 50%;
+    left: calc((100% - 970px) / 2);
+    transform: translate(0, -50%);
+    width: 250px;
+    height: 480px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    background: var(--shell-color);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.shell li {
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.image {
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+
+.iconfont {
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 300 23px '';
+}
+
+.text,
+.iconfont {
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.text {
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.text {
+    font: 500 17px;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+
+header {
+    position: relative;
+}
+
+.image-text {
+    display: flex;
+    align-items: center;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    margin-top: 2px;
+    font: 600 18px '';
+}
+
+.software {
+    font-size: 20px;
+    margin-top: -2px;
+    display: block;
+}
+
+.image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-text .image img {
+    width: 45px;
+    border-radius: 6px;
+}
+
+.shell li a{
+    list-style: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+}
+
+.shell li:nth-child(1) a{
+    background-color: skyblue;
+}
+
+.shell li a:hover {
+    background-color: var(--primary-color);
+}
+
+.shell li a:hover .text {
+    color: var(--shell-color);
+}
+
+.menu-bar {
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+.menu-bar::-webkit-scrollbar {
+    display: none;
+}

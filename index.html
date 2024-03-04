@@ -1,83 +1,118 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>项目简介</title>
-    <link rel="stylesheet" href="style.css"> <!--用css为页面布局设置样式 -->
-</head>
-<body>
-    <header>
-    <button class="menu">&#9776;</button>
-    <h1>OUC软工第三小组</h1>
-    <nav>
-    <ul><!--#页面的跳转 -->
-        <li><a href="#">返回</a></li>    <!-- 在此处输入主界面的 eg：page.html  -->
-        <!--
-        <li><a href="#">關於我們</a></li>
-        <li><a href="#">門市據點</a></li>
-        <li><a href="#">會員專區</a></li>
-        -->
-    </ul>
-    </nav>
-    </header>
+    <link rel="stylesheet" href="./css/header.css" />
+    <!--用css为页面布局设置样式 -->
+    <link rel="stylesheet" href="./css/style.css" />
+    <!--用css为页面布局设置样式 -->
+    <link rel="stylesheet" href="./css/history.css" />
+    <!--用css为页面布局设置样式 -->
+    <link rel="stylesheet" href="./css/define.css" />
+    <!--用css为页面布局设置样式 -->
+    <link rel="stylesheet" href="./css/base.css" />
+    <!--用css为页面布局设置样式 -->
+    <style>
+      body .nav ul .nav-box {
+        background-color: red;
+      }
+      body .nav ul li:nth-child(1):hover ~ .nav-box {
+        left: 0px;
+        background-color: red;
+      }
 
-    <main><!--主体部分-->
-    <section class="news"><!--分区块-->
-    <h2>SAR图像变化检测</h2>
-    <p> 本项目采用Ms-CapsNet网络的高精度SAR图像变化检测算法，对同一地区不同时相<br>
-        的两幅或多幅SAR图像进行分析，准确地检测出其中的变化部分和未变化部分。用户<br>
-        可以快速、准确地进行SAR图像的变化检测，提高对地图变化的监测能力。我们的解<br>
-        决方案不仅高效，而且易于使用，使用户能够轻松地访问和利用我们的服务。<br>
-       <br><br><br>
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        项目成员：刘襄琪   马子淇   孟广樾   郭富豪   唐亚彤<br>
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-        特别鸣谢：高峰（课任老师）  刘文力（助教）
+      body .nav ul li:nth-child(2):hover ~ .nav-box {
+        left: 120px;
+        background-color: #8da1f8;
+      }
 
-    </p>
-    </section>
-    <section class="shop">
-    <img src="images/SAR.jpg" alt="图片1"> <!--在src处填图片位置，如images/p3.png-->
-    <div class="info">
-    <h2>专业，我们是认真的！</h2>
-    <p>Ms-CapsNet网络作为核心算法，结合多尺度卷积、多维主胶囊层和<br>
-        多尺度特征提取的dropout机制,专注为您提供更高的精度和准确性。
-       </p>
+      body .nav ul li:nth-child(3):hover ~ .nav-box {
+        left: 240px;
+        background-color: #7df88e;
+      }
+
+      body .nav ul li:nth-child(4):hover ~ .nav-box {
+        left: 360px;
+        background-color: #ffb1b1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="logo">
+        <img src="./images/tx.jpg" alt="" />
+        <span>OUC软工第3组</span>
+      </div>
+      <ul>
+        <li><a href="./index.html">主页</a></li>
+        <li><a href="./home.html">SAR</a></li>
+        <li><a href="./accuracy.html">ACCURACY</a></li>
+        <li><a href="./home.html"></a></li>
+        <div class="nav-box"></div>
+      </ul>
     </div>
-    </section>
+    <div class="background"></div>
+    <main>
+      <!--主体部分-->
+      <section class="news">
+        <!--分区块-->
+        <h2>SAR图像变化检测</h2>
+        <p>
+          本项目采用Ms-CapsNet网络的高精度SAR图像变化检测算法,对同一地区不同时相<br />
+          的两幅或多幅SAR图像进行分析,准确地检测出其中的变化部分和未变化部分。用户<br />
+          可以快速、准确地进行SAR图像的变化检测,提高对地图变化的监测能力。我们的解<br />
+          决方案不仅高效，而且易于使用，使用户能够轻松地访问和利用我们的服务。<br />
+          <br /><br /><br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          项目成员：刘襄琪 马子淇 孟广樾 郭富豪 唐亚彤<br />
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          特别鸣谢：高峰（课任老师） 刘文力（助教）
+        </p>
+      </section>
+      <section class="shop">
+        <img src="images/changephoto.jpg" alt="图片1" />
+        <div class="info">
+          <h2>专业，我们是认真的！</h2>
+          <p>
+            SAFNet网络作为核心算法，结合多尺度卷积、多维主胶囊层和<br />
+            多尺度特征提取的dropout机制,专注为您提供更高的精度和准确性。
+          </p>
+        </div>
+      </section>
+      <section class="product">
+        <div>
+          <br /><br />
+          <img src="images/stand_meeting.png" alt="小组讨论照片1" />
+          <h3>站立会议</h3>
+          <p>“每周日常”</p>
+        </div>
+        <div>
+          <img src="images/discussion1.jpg" alt="小组讨论照片2" />
+          <h3>修改Bug</h3>
+          <p>“痛苦面具”</p>
+        </div>
+        <div>
+          <br /><br />
+          <img src="images/discussion2.png" alt="小组讨论照片3" />
+          <h3>小组讨论</h3>
+          <p>“制定计划”</p>
+        </div>
+      </section>
 
-    <section class="product">
-        <div>
-            <img src="images/SAR.jpg" alt="小组讨论照片1"> <!--在src处填图片位置，如images/p3.png-->
-            <h3>标题</h3>
-            <p>内容</p>
-        </div>
-        <div>
-            <img src="images/SAR.jpg" alt="小组讨论照片2"> <!--在src处填图片位置，如images/p3.png-->
-            <h3>标题</h3>
-            <p>内容</p>
-        </div>
-        <div>
-            <img src="images/SAR.jpg" alt="小组讨论照片3">  <!--在src处填图片位置，如images/p3.png-->
-            <h3>标题</h3>
-            <p>内容</p>
-        </div>
-    </section>
-
-    <section class="newsletter">
+      <section class="newsletter">
         <p>期待您的私信</p>
         <form>
-            <input type="email" placeholder="请输入您的Email" required>
-            <button type="submit">送出</button>
+          <input type="email" placeholder="请输入您的Email" required />
+          <button type="submit">送出</button>
         </form>
-    </section>
-
+      </section>
     </main>
     <footer>
-        <p>OUC Software engineering Group Ⅲ ,Thank You For Your Supporting！</p>
+      <p>OUC Software engineering Group Ⅲ ,Thank You For Your Supporting!</p>
     </footer>
-</body>
+  </body>
 </html>

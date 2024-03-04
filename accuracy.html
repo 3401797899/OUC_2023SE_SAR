@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/define.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/accuracy.css" />
+    <link rel="stylesheet" href="./css/history.css" />
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <style>
+      body .nav ul .nav-box {
+        left: 240px;
+        background-color: #7df88e;
+      }
+      body .nav ul li:nth-child(1):hover ~ .nav-box {
+        left: 0px;
+        background-color: red;
+      }
+
+      body .nav ul li:nth-child(2):hover ~ .nav-box {
+        left: 120px;
+        background-color: #8da1f8;
+      }
+
+      body .nav ul li:nth-child(3):hover ~ .nav-box {
+        left: 240px;
+        background-color: #7df88e;
+      }
+
+      body .nav ul li:nth-child(4):hover ~ .nav-box {
+        left: 360px;
+        background-color: #ffb1b1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="nav">
+      <div class="logo">
+        <img src="./images/tx.jpg" alt="" />
+        <span>OUC软工第3组</span>
+      </div>
+      <ul>
+        <li><a href="./index.html">主页</a></li>
+        <li><a href="./home.html">SAR</a></li>
+        <li><a href="./accuracy.html">ACCURACY</a></li>
+        <li><a href="./home.html"></a></li>
+        <div class="nav-box"></div>
+      </ul>
+    </div>
+
+    <div class="background"></div>
+
+    <div class="load">
+      <div class="ctrl">
+        <div class="menu">
+          <!-- <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul> -->
+          <div class="download"><img src="./images/download.png" /></div>
+          <div class="refresh"><img src="./images/refresh.png" /></div>
+          <div class="accuracy"><img src="./images/accuracy.png" /></div>
+        </div>
+        <button class="accuracy btn" id="upload">Upload</button>
+      </div>
+
+      <div id="upload-img" class="upload-img">
+        <form method="post" name="form" id="form" enctype="multipart/form-data">
+          <div class="first box">
+            <input type="file" class="input" name="first" id="first" />
+          </div>
+          <div class="second box">
+            <input type="file" class="input" name="second" id="second" />
+          </div>
+          <div class="result box">
+            <input type="file" class="input" name="result" id="result" />
+          </div>
+        </form>
+      </div>
+
+      <div class="bar">
+        <div class="process">ACCURACY:<div style="margin-left: 20px;"><div class="loading"></div></div><div id="accuracy"></div></div>
+      </div>
+    </div>
+  </body>
+  <script rel="stylesheet" src="./js/index.js"></script>
+</html>
